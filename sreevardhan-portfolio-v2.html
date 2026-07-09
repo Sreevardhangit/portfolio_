@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gurram Sreevardhan Reddy — Azure Data Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FAFAF8;
+    --surface:#FFFFFF;
+    --line:#E6E4DD;
+    --line-soft:#EFEEE8;
+    --ink:#15171C;
+    --ink-dim:#5B5F6B;
+    --ink-faint:#8A8E99;
+    --azure:#2E64D9;
+    --azure-dark:#1E4AAD;
+    --amber:#B7791F;
+    --bronze:#A9744F;
+    --silver:#6B7280;
+    --gold:#B7791F;
+    --radius:10px;
+    --maxw:1040px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    font-size:16px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  .mono{font-family:'JetBrains Mono',monospace;}
+  h1,h2,h3,h4{font-family:'Sora',sans-serif; color:var(--ink); letter-spacing:-0.01em;}
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px;}
+  img,svg{display:block;}
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:sticky; top:0; z-index:40;
+    background:rgba(250,250,248,0.9);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{display:flex; align-items:center; justify-content:space-between; height:64px;}
+  .brand{font-family:'Sora',sans-serif; font-weight:700; font-size:15.5px;}
+  .brand .dot{color:var(--azure);}
+  .navlinks{display:flex; align-items:center; gap:30px; font-size:14px; color:var(--ink-dim);}
+  .navlinks a{transition:color .15s; padding:4px 0;}
+  .navlinks a:hover{color:var(--ink);}
+  .nav-cta{
+    font-size:13.5px; font-weight:500; padding:8px 16px; border-radius:6px;
+    background:var(--ink); color:#fff;
+  }
+  .nav-cta:hover{background:var(--azure-dark);}
+  .navtoggle{display:none;}
+
+  /* ---------- HERO ---------- */
+  .hero{padding:88px 0 72px; border-bottom:1px solid var(--line);}
+  .hero-top{display:grid; grid-template-columns:1.15fr 0.85fr; gap:56px; align-items:start;}
+  .avail{
+    display:inline-flex; align-items:center; gap:7px; font-size:12.5px; font-family:'JetBrains Mono',monospace;
+    color:var(--ink-dim); border:1px solid var(--line); border-radius:20px; padding:5px 12px 5px 10px;
+    margin-bottom:26px; background:var(--surface);
+  }
+  .avail .dot2{width:6px; height:6px; border-radius:50%; background:#2E9E5B;}
+  .hero h1{font-size:clamp(32px,4.6vw,46px); font-weight:700; line-height:1.12; margin-bottom:16px;}
+  .hero h1 em{font-style:normal; color:var(--azure);}
+  .hero p.lede{font-size:17px; color:var(--ink-dim); max-width:520px; margin-bottom:32px;}
+  .hero-actions{display:flex; gap:12px; flex-wrap:wrap;}
+  .btn{
+    font-size:14px; font-weight:500; padding:11px 20px; border-radius:7px;
+    border:1px solid var(--line); transition:all .15s; display:inline-flex; align-items:center; gap:8px;
+    background:var(--surface);
+  }
+  .btn-primary{background:var(--ink); color:#fff; border-color:var(--ink);}
+  .btn-primary:hover{background:var(--azure-dark); border-color:var(--azure-dark);}
+  .btn-ghost:hover{border-color:var(--ink-faint); background:var(--line-soft);}
+
+  .meta-panel{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+    padding:22px 24px;
+  }
+  .meta-row{display:flex; justify-content:space-between; padding:11px 0; border-bottom:1px solid var(--line-soft); font-size:13.5px;}
+  .meta-row:last-child{border-bottom:none;}
+  .meta-row .k{color:var(--ink-faint); font-family:'JetBrains Mono',monospace; font-size:12px; text-transform:uppercase; letter-spacing:.04em;}
+  .meta-row .v{color:var(--ink); font-weight:500; text-align:right;}
+
+  .stack-strip{margin-top:64px;}
+  .stack-strip .label{font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--ink-faint); text-transform:uppercase; letter-spacing:.06em; margin-bottom:14px;}
+  .stack-row{display:flex; flex-wrap:wrap; gap:10px;}
+  .stack-item{
+    font-size:13.5px; padding:7px 13px; border:1px solid var(--line); border-radius:6px; color:var(--ink-dim);
+    background:var(--surface);
+  }
+
+  /* ---------- SECTION SHELL ---------- */
+  section{padding:76px 0; border-bottom:1px solid var(--line);}
+  .sec-head{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:40px; gap:20px; flex-wrap:wrap;}
+  .sec-num{font-family:'JetBrains Mono',monospace; font-size:12.5px; color:var(--azure); margin-bottom:10px; letter-spacing:.04em;}
+  .sec-head h2{font-size:clamp(22px,2.8vw,28px); font-weight:700;}
+  .sec-sub{color:var(--ink-faint); font-size:14px; max-width:340px; text-align:right;}
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{display:grid; grid-template-columns:1.4fr 1fr; gap:60px;}
+  .about-grid p{color:var(--ink-dim); margin-bottom:16px; font-size:15.5px;}
+  .about-grid p strong{color:var(--ink); font-weight:600;}
+  .fact-list{display:flex; flex-direction:column; gap:0;}
+  .fact{padding:16px 0; border-top:1px solid var(--line-soft); display:flex; justify-content:space-between; gap:16px;}
+  .fact:first-child{border-top:none;}
+  .fact .fk{font-size:13.5px; color:var(--ink-faint);}
+  .fact .fv{font-size:14.5px; font-weight:600; text-align:right;}
+
+  /* ---------- SKILLS ---------- */
+  .skills-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:16px;}
+  .skill-col h3{font-size:12.5px; text-transform:uppercase; letter-spacing:.05em; color:var(--ink-faint); font-weight:600; margin-bottom:14px; font-family:'JetBrains Mono',monospace;}
+  .skill-col ul{list-style:none; display:flex; flex-direction:column; gap:9px;}
+  .skill-col li{font-size:14.5px; color:var(--ink); padding-left:14px; position:relative;}
+  .skill-col li::before{content:''; position:absolute; left:0; top:8px; width:5px; height:5px; border-radius:50%; background:var(--azure);}
+
+  /* ---------- EXPERIENCE ---------- */
+  .exp-card{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:34px;}
+  .exp-head{display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:10px; margin-bottom:4px;}
+  .exp-role{font-size:19px; font-weight:700;}
+  .exp-dates{font-family:'JetBrains Mono',monospace; font-size:12.5px; color:var(--ink-faint); white-space:nowrap;}
+  .exp-client{color:var(--azure); font-size:14px; font-weight:500; margin-bottom:24px;}
+  .exp-list{list-style:none; display:grid; grid-template-columns:1fr 1fr; gap:14px 28px;}
+  .exp-list li{color:var(--ink-dim); font-size:14.5px; padding-left:18px; position:relative;}
+  .exp-list li::before{content:''; position:absolute; left:0; top:8px; width:5px; height:5px; background:var(--ink-faint); border-radius:50%;}
+
+  /* ---------- PROJECT / CASE STUDY ---------- */
+  .case{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); overflow:hidden;}
+  .case-top{padding:34px 34px 0;}
+  .case-tag{font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--azure); text-transform:uppercase; letter-spacing:.05em; margin-bottom:10px;}
+  .case h3{font-size:21px; margin-bottom:10px;}
+  .case-desc{color:var(--ink-dim); font-size:14.5px; max-width:640px; margin-bottom:28px;}
+
+  .flow{padding:0 34px 30px;}
+  .flow-row{display:flex; align-items:center; gap:0;}
+  .flow-stage{
+    flex:1; border:1px solid var(--line); border-radius:8px; padding:16px 18px; background:var(--bg);
+  }
+  .flow-stage .ft{font-family:'JetBrains Mono',monospace; font-size:11.5px; text-transform:uppercase; letter-spacing:.05em; margin-bottom:6px; font-weight:600;}
+  .flow-stage.b .ft{color:var(--bronze);}
+  .flow-stage.s .ft{color:var(--silver);}
+  .flow-stage.g .ft{color:var(--gold);}
+  .flow-stage .fd{font-size:12.5px; color:var(--ink-faint); line-height:1.4;}
+  .flow-arrow{padding:0 14px; color:var(--ink-faint); font-size:16px; flex-shrink:0;}
+
+  .case-body{border-top:1px solid var(--line); background:var(--bg); padding:28px 34px;}
+  .case-list{list-style:none; display:grid; grid-template-columns:1fr 1fr; gap:12px 28px;}
+  .case-list li{color:var(--ink-dim); font-size:14px; padding-left:16px; position:relative;}
+  .case-list li::before{content:''; position:absolute; left:0; top:7px; width:5px; height:5px; background:var(--azure); border-radius:50%;}
+
+  /* ---------- EDUCATION / CERTS ---------- */
+  .split{display:grid; grid-template-columns:1fr 1fr; gap:60px;}
+  .timeline{position:relative; padding-left:22px; border-left:1px solid var(--line);}
+  .tl-item{position:relative; padding-bottom:26px;}
+  .tl-item:last-child{padding-bottom:0;}
+  .tl-item::before{content:''; position:absolute; left:-27px; top:4px; width:9px; height:9px; border-radius:50%; background:var(--surface); border:2px solid var(--azure);}
+  .tl-item h4{font-size:15px; font-weight:600; margin-bottom:2px;}
+  .tl-item .sub{font-size:13.5px; color:var(--ink-faint);}
+  .tl-item .grade{font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--amber); margin-top:5px; display:inline-block;}
+
+  .cert-item{
+    display:flex; gap:14px; align-items:flex-start; padding:18px 0; border-top:1px solid var(--line-soft);
+  }
+  .cert-item:first-child{border-top:none;}
+  .cert-mark{
+    width:36px; height:36px; border-radius:8px; flex-shrink:0; border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center; background:var(--surface);
+    font-family:'JetBrains Mono',monospace; font-size:10.5px; font-weight:700; color:var(--azure); text-align:center; line-height:1.1;
+  }
+  .cert-item h4{font-size:14.5px; font-weight:600; margin-bottom:2px;}
+  .cert-item .sub{font-size:13px; color:var(--ink-faint); font-family:'JetBrains Mono',monospace;}
+
+  /* ---------- CONTACT ---------- */
+  .contact{border-bottom:none;}
+  .contact-inner{
+    background:var(--ink); color:#fff; border-radius:14px; padding:60px 44px; text-align:center;
+  }
+  .contact-inner h2{color:#fff; font-size:clamp(24px,3.2vw,32px); margin-bottom:12px;}
+  .contact-inner p{color:#B8BCC6; font-size:15px; margin-bottom:30px;}
+  .contact-links{display:flex; justify-content:center; gap:12px; flex-wrap:wrap;}
+  .contact-inner .btn-primary{background:#fff; color:var(--ink); border-color:#fff;}
+  .contact-inner .btn-primary:hover{background:#E9EBF0;}
+  .contact-inner .btn-ghost{border-color:#33384A; color:#fff;}
+  .contact-inner .btn-ghost:hover{background:#1F2333;}
+
+  footer{padding:28px 0; text-align:center; font-size:12.5px; color:var(--ink-faint);}
+
+  @media(max-width:860px){
+    .hero-top,.about-grid,.split{grid-template-columns:1fr;}
+    .skills-grid{grid-template-columns:1fr 1fr;}
+    .exp-list,.case-list{grid-template-columns:1fr;}
+    .sec-sub{text-align:left;}
+    .flow-row{flex-direction:column; align-items:stretch; gap:10px;}
+    .flow-arrow{transform:rotate(90deg); text-align:center; padding:0;}
+    .navlinks{display:none;}
+  }
+  :focus-visible{outline:2px solid var(--azure); outline-offset:2px;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand">Sreevardhan Reddy<span class="dot">.</span></div>
+    <div class="navlinks">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#project">Project</a>
+      <a href="#education">Education</a>
+    </div>
+    <a class="nav-cta" href="mailto:vardhan114433@gmail.com">Contact</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-top">
+      <div>
+        <div class="avail"><span class="dot2"></span>Open to new opportunities</div>
+        <h1>Data pipelines that hold up<br>in <em>production.</em></h1>
+        <p class="lede">I'm Sreevardhan, an Azure Data Engineer with 2 years of experience building ETL/ELT pipelines with Azure Data Factory, PySpark, and SQL — currently working on enterprise data platforms at Cognizant.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="mailto:vardhan114433@gmail.com">Get in touch</a>
+          <a class="btn btn-ghost" href="https://www.linkedin.com/in/sree-vardhan-1151a7298" target="_blank" rel="noopener">LinkedIn ↗</a>
+          <a class="btn btn-ghost" href="tel:+916305519275">+91 63055 19275</a>
+        </div>
+      </div>
+      <div class="meta-panel">
+        <div class="meta-row"><span class="k">Role</span><span class="v">Azure Data Engineer</span></div>
+        <div class="meta-row"><span class="k">Company</span><span class="v">Cognizant</span></div>
+        <div class="meta-row"><span class="k">Client</span><span class="v">McDonald's</span></div>
+        <div class="meta-row"><span class="k">Location</span><span class="v">Bengaluru, India</span></div>
+        <div class="meta-row"><span class="k">Experience</span><span class="v">2 years</span></div>
+        <div class="meta-row"><span class="k">Certified</span><span class="v">DP-900 · DP-203</span></div>
+      </div>
+    </div>
+
+    <div class="stack-strip">
+      <div class="label">Core stack</div>
+      <div class="stack-row">
+        <span class="stack-item">Azure Data Factory</span>
+        <span class="stack-item">PySpark</span>
+        <span class="stack-item">Spark SQL</span>
+        <span class="stack-item">ADLS Gen2</span>
+        <span class="stack-item">Azure Synapse</span>
+        <span class="stack-item">Azure Databricks</span>
+        <span class="stack-item">SQL Server</span>
+        <span class="stack-item">Python</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="sec-num">01 / About</div>
+        <h2>Background</h2>
+      </div>
+      <p class="sec-sub">A quick summary of what I do and how I work.</p>
+    </div>
+    <div class="about-grid">
+      <div>
+        <p>I design, build, and maintain <strong>scalable data pipelines</strong> using Azure Data Factory, PySpark, SQL, and Azure Data Lake Storage — the kind of infrastructure that quietly keeps dashboards accurate and reports on time.</p>
+        <p>My focus is <strong>ETL/ELT development</strong>: ingesting data from multiple source systems, transforming it with PySpark, and structuring it through Bronze, Silver, and Gold layers so downstream teams can trust what they're looking at.</p>
+        <p>For the past two years I've worked on Cognizant's McDonald's account, building parameterized, reusable pipelines and collaborating with business analysts, QA, and onshore stakeholders to ship data solutions that hold up under real operational load.</p>
+      </div>
+      <div class="fact-list">
+        <div class="fact"><span class="fk">Current role</span><span class="fv">Azure Data Engineer</span></div>
+        <div class="fact"><span class="fk">Employer</span><span class="fv">Cognizant</span></div>
+        <div class="fact"><span class="fk">Degree</span><span class="fv">B.Tech, CS (AI &amp; ML)</span></div>
+        <div class="fact"><span class="fk">University</span><span class="fv">JNTU Anantapur</span></div>
+        <div class="fact"><span class="fk">Graduated</span><span class="fv">2024</span></div>
+        <div class="fact"><span class="fk">Certifications</span><span class="fv">DP-900, DP-203</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="sec-num">02 / Skills</div>
+        <h2>What I work with</h2>
+      </div>
+      <p class="sec-sub">Grouped by where each tool fits in the pipeline.</p>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-col">
+        <h3>Cloud &amp; Orchestration</h3>
+        <ul>
+          <li>Azure Data Factory</li>
+          <li>Azure Data Lake Storage (Gen2)</li>
+          <li>Azure Synapse</li>
+          <li>Azure Databricks</li>
+        </ul>
+      </div>
+      <div class="skill-col">
+        <h3>Big Data</h3>
+        <ul>
+          <li>PySpark</li>
+          <li>Spark SQL</li>
+          <li>Apache Spark</li>
+        </ul>
+      </div>
+      <div class="skill-col">
+        <h3>Languages &amp; Data</h3>
+        <ul>
+          <li>Python</li>
+          <li>SQL</li>
+          <li>SQL Server / MySQL</li>
+          <li>Data Warehousing</li>
+        </ul>
+      </div>
+      <div class="skill-col">
+        <h3>Delivery</h3>
+        <ul>
+          <li>Git</li>
+          <li>JIRA</li>
+          <li>Agile / Sprints</li>
+          <li>Code Review</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="sec-num">03 / Experience</div>
+        <h2>Work history</h2>
+      </div>
+      <p class="sec-sub">One role, going deep on an enterprise account.</p>
+    </div>
+    <div class="exp-card">
+      <div class="exp-head">
+        <div class="exp-role">Azure Data Engineer</div>
+        <div class="exp-dates">2024 — Present</div>
+      </div>
+      <div class="exp-client">Cognizant · Client: McDonald's</div>
+      <ul class="exp-list">
+        <li>Designed and scheduled end-to-end ETL pipelines in Azure Data Factory to ingest data from multiple source systems into ADLS Gen2.</li>
+        <li>Developed PySpark scripts for large-scale transformation, cleansing, and aggregation, improving processing efficiency.</li>
+        <li>Wrote complex SQL — joins, window functions, stored procedures — for data validation and business logic.</li>
+        <li>Implemented Medallion architecture (Bronze/Silver/Gold) for structured, reliable data flow.</li>
+        <li>Built parameterized, reusable ADF pipelines that cut development effort and improved maintainability.</li>
+        <li>Monitored and resolved pipeline failures and data quality issues to keep SLAs on track.</li>
+        <li>Partnered with business analysts, QA, and onshore stakeholders to gather requirements and ship solutions.</li>
+        <li>Took part in code reviews, unit testing, and deployments under Agile practices.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="project">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="sec-num">04 / Featured Project</div>
+        <h2>Enterprise Data Integration &amp; Reporting Platform</h2>
+      </div>
+      <p class="sec-sub">Client: McDonald's</p>
+    </div>
+    <div class="case">
+      <div class="case-top">
+        <div class="case-tag">Data pipeline · Reporting</div>
+        <h3>Centralizing sales, inventory &amp; operations data for reporting</h3>
+        <p class="case-desc">A pipeline that pulls data from multiple operational systems into a single, structured lake — moving it from raw ingestion through curated data marts ready for dashboards.</p>
+      </div>
+      <div class="flow">
+        <div class="flow-row">
+          <div class="flow-stage b"><div class="ft">Bronze</div><div class="fd">Automated ADF pipelines ingest sales, inventory &amp; ops data from source systems</div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-stage s"><div class="ft">Silver</div><div class="fd">PySpark notebooks clean and apply business rules to raw data</div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-stage g"><div class="ft">Gold</div><div class="fd">SQL-based data marts power downstream reporting &amp; dashboards</div></div>
+        </div>
+      </div>
+      <div class="case-body">
+        <ul class="case-list">
+          <li>Built automated ingestion pipelines pulling sales, inventory, and operations data into a centralized Azure Data Lake.</li>
+          <li>Transformed and curated raw data with PySpark, applying business rules to produce analytics-ready datasets.</li>
+          <li>Created SQL-based data marts to support downstream reporting and dashboarding.</li>
+          <li>Optimized pipeline performance, cutting data refresh time and improving data availability for reporting teams.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="sec-num">05 / Education &amp; Certifications</div>
+        <h2>Foundations</h2>
+      </div>
+    </div>
+    <div class="split">
+      <div class="timeline">
+        <div class="tl-item">
+          <h4>B.Tech, Computer Science (AI &amp; ML)</h4>
+          <div class="sub">Jawaharlal Nehru Technological University, Anantapur · 2024</div>
+          <span class="grade">CGPA 8.3</span>
+        </div>
+        <div class="tl-item">
+          <h4>Intermediate — MPC</h4>
+          <div class="sub">Sri Chaitanya Jr College</div>
+          <span class="grade">CGPA 8.3</span>
+        </div>
+        <div class="tl-item">
+          <h4>Schooling</h4>
+          <div class="sub">Sri Kakatiya EM School</div>
+          <span class="grade">CGPA 9.5</span>
+        </div>
+      </div>
+      <div>
+        <div class="cert-item">
+          <div class="cert-mark">DP<br>900</div>
+          <div>
+            <h4>Azure Data Fundamentals</h4>
+            <div class="sub">Microsoft Certified · DP-900</div>
+          </div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-mark">DP<br>203</div>
+          <div>
+            <h4>Azure Data Engineer Associate</h4>
+            <div class="sub">Microsoft Certified · DP-203</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="contact-inner">
+      <h2>Let's talk about your data.</h2>
+      <p>Open to Azure data engineering roles and freelance pipeline work.</p>
+      <div class="contact-links">
+        <a class="btn btn-primary" href="mailto:vardhan114433@gmail.com">vardhan114433@gmail.com</a>
+        <a class="btn btn-ghost" href="https://www.linkedin.com/in/sree-vardhan-1151a7298" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn btn-ghost" href="tel:+916305519275">+91 63055 19275</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>© 2026 Gurram Sreevardhan Reddy · Bengaluru, India</footer>
+
+</body>
+</html>
